@@ -25,6 +25,9 @@ public abstract class MagicMonster extends Monster {
         if (h < maxMP) {
             this.magicPoints = h;
         }
+        else{
+            this.magicPoints = maxMP;
+        }
 
     }
 

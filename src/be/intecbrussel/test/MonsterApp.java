@@ -6,39 +6,37 @@ public class MonsterApp {
         Witch witch = new Witch(30, 100);
         witch.setMaxHp(30);
         bear.setMaxHp(50);
-        int witchHitPoints = 0;//witch.getHitPoints();
-        int bearHitPoints = 0; //bear.getHitPoints();
         int witchMagicPoints = witch.getMagicPoints();
         int bearRagePoints = bear.getRagePoints();
 
-        while (witchHitPoints < witch.getMaxHp() || bearHitPoints < bear.getMaxHp()) {
-            if (witchHitPoints > witch.getMaxHp()) {
-                System.out.println("witch is dead");
-                break;
-            }
-            witch.fireballAttack();
-            System.out.println("witch magic points " + witchMagicPoints);
+        while (witch.getHitPoints() > 0 && bear.getHitPoints() > 0) {
+
+            int fireballAttack = witch.fireballAttack();
+            bear.takeDamage(fireballAttack);
             witchMagicPoints += 4;
             witch.setMagicPoints(witchMagicPoints);
-            System.out.println("witch Magic Points after  turn " + witchMagicPoints);
-            witchHitPoints++;
-            bear.bearClawAttack();
-            System.out.println("bear's rage points " + bearRagePoints);
+            int clawAttack = bear.bearClawAttack();
+            witch.takeDamage(clawAttack);
             bearRagePoints += 5;
             bear.setRagePoints(bearRagePoints);
-            System.out.println("bear's rage points after turn " + bearRagePoints);
-            bearHitPoints++;
 
+            if (witch.getHitPoints() <= 0) {
+                System.out.println("witch is dead");
+            }
+
+            if (bear.getHitPoints() <= 0) {
+                System.out.println("bear is dead");
+            }
         }
 
         witch.restoreMp(witchMagicPoints);
         bear.restoreRp(bearRagePoints);
-        System.out.println("witch magic points are " + witchMagicPoints);
+        System.out.println("witch magic points are " + witch.getMagicPoints());
 
-        System.out.println("Bear rage points are " + bearRagePoints);
-        if (witch.getMagicPoints() < bearRagePoints) {
+        System.out.println("Bear rage points are " + bear.getRagePoints());
+        if (witch.getMagicPoints() < bear.getRagePoints()) {
             System.out.println("Bear is the winner");
-        } else {
+        } else if (witch.getMagicPoints() > bear.getRagePoints()) {
             System.out.println("witch is the winner");
         }
 

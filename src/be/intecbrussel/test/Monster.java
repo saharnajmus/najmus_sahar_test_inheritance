@@ -35,9 +35,10 @@ public abstract class Monster {
     }
 
     public boolean takeDamage(int d) {
-        if (d <= 0) {
+        if (this.hitPoints <=0) {
             return false;
         } else {
+            this.hitPoints-=d;
             return true;
         }
     }

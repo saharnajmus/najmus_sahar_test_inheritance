@@ -10,7 +10,7 @@ public abstract class MightMonster extends Monster {
 
     MightMonster(int maxRp, int maxHp) {
         super(maxHp);
-        setRagePoints(maxRp);
+        this.maxRp=maxRp;
     }
 
     public int getRagePoints() {
@@ -24,6 +24,8 @@ public abstract class MightMonster extends Monster {
     public void restoreRp(int h) {
         if (h < maxRp) {
             this.ragePoints = h;
+        }else {
+            this.ragePoints = maxRp;
         }
     }
 
